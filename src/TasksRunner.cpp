@@ -10,6 +10,12 @@ namespace UbiTasks
   namespace fs = std::filesystem;
 
 
+  TasksRunner::TasksRunner(ITask& task)
+    : mTask(task)
+  {
+  }
+
+
   void TasksRunner::RunOnInputDir(fs::path dir)
   {
     for(const auto& entry : fs::directory_iterator(dir))
@@ -17,13 +23,10 @@ namespace UbiTasks
       if(entry.is_regular_file())
       {
         std::unique_lock shield(mMutex);
-        mTasks[entry.path().string()] = std::async([entry]
+        mAsyncTasks[entry.path().string()] = std::async([entry, this]
         {
-          std::this_thread::sleep_for(std::chrono::seconds(rand() % 3));
-          std::ifstream is(entry.path());
-          std::stringstream ss;
-          ss << is.rdbuf();
-          return ss.str();
+          std::ifstream is(entry.path(), std::ios::binary);
+          return mTask.Execute(is);
         });
       }
     }
@@ -33,24 +36,24 @@ namespace UbiTasks
   bool TasksRunner::IsEmpty()
   {
     std::unique_lock shield(mMutex);
-    return mTasks.empty();
+    return mAsyncTasks.empty();
   }
 
 
   TaskResult TasksRunner::PopResult()
   {
-    for(auto& task : mTasks)
+    for(auto& task : mAsyncTasks)
     {
       if(task.second.valid() && task.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
       {
         TaskResult result{true, task.first, task.second.get()};
         {
           std::unique_lock shield(mMutex);
-          mTasks.erase(task.first);
+          mAsyncTasks.erase(task.first);
         }
         return result;
       }
     }
-    return {false};
+    return {false, "", ""};
   }
 }

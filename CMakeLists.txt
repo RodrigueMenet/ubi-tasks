@@ -8,7 +8,8 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 set(SOURCES src/main.cpp
         src/crc32.cpp
-        "src/TasksRunner.cpp"
+        src/TasksRunner.cpp
+        src/Crc32Task.cpp
            )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

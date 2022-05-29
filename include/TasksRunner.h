@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 
+#include "ITask.h"
+
 
 namespace UbiTasks
 {
@@ -14,10 +16,11 @@ namespace UbiTasks
     std::string InputFilePath; // the path to the file the task were done on
     std::string Output; // the result to be displayed
   };
-
-
+  
   struct TasksRunner
   {
+    TasksRunner(ITask & task);
+
     /// @brief main method of the runner to start a specific task on a directory
     /// @param the path to the folder containing the filed to run the task on
     void RunOnInputDir(std::filesystem::path dir);
@@ -31,7 +34,8 @@ namespace UbiTasks
     TaskResult PopResult();
 
   private:
+    ITask & mTask;
     std::mutex mMutex;
-    std::map<std::string, std::future<std::string>> mTasks;
+    std::map<std::string, std::future<std::string>> mAsyncTasks;
   };
 }
