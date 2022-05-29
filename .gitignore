@@ -1,0 +1,9 @@
+cmake-*
+.idea
+_build
+build
+*.zip
+
+/.vs/
+/cmake_install.cmake
+/Makefile
