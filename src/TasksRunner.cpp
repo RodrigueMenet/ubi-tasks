@@ -26,7 +26,7 @@ namespace UbiTasks
         mAsyncTasks[entry.path().string()] = std::async([entry, this]
         {
           std::ifstream is(entry.path(), std::ios::binary);
-          return mTask.Execute(is);
+          return mTask.Execute(is, entry.path().string());
         });
       }
     }

@@ -1,16 +1,20 @@
 #include <iostream>
+#include <filesystem>
 
 #include "Crc32Task.h"
+#include "OpusTask.h"
 #include "TasksRunner.h"
 
 int main()
 {
-  UbiTasks::Crc32Task crc32_task(3);
+  //UbiTasks::Crc32Task crc32_task(3);
 
   //std::stringstream ss("Test");
   //std::cout << crc32_task.Execute(ss) << std::endl;
   //return 1;
-  UbiTasks::TasksRunner runner(crc32_task);
+
+  UbiTasks::OpusTask opus_task((std::filesystem::current_path() / "opus_result").string(), UbiTasks::OpusMode::LowDelay);
+  UbiTasks::TasksRunner runner(opus_task);
 
   runner.RunOnInputDir(std::filesystem::current_path());
 
@@ -19,9 +23,8 @@ int main()
     if (const auto result = runner.PopResult(); result.IsValid == true)
     {
       std::cout << "##################################" << std::endl;
-      std::cout << "#" << result.InputFilePath << std::endl;
-      std::cout << "##################################" << std::endl << std::endl;
       std::cout << result.Output << std::endl << std::endl;
+      std::cout << "##################################" << std::endl << std::endl;
     }
     else
     {

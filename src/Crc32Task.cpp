@@ -13,7 +13,7 @@ namespace UbiTasks
   }
 
 
-  std::string Crc32Task::Execute(const std::istream& is)
+  std::string Crc32Task::Execute(const std::istream& is, const std::string & filePath)
   {
     std::stringstream ss;
 
@@ -23,7 +23,7 @@ namespace UbiTasks
 
     ss.str("");
 
-    ss << "0x" << std::hex << crc32(mSeed, crc_input.c_str(), crc_input.size());
+    ss << filePath << " >> CRC32 = 0x" << std::hex << crc32(mSeed, crc_input.c_str(), crc_input.size());
 
     return ss.str();
   }

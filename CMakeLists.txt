@@ -10,6 +10,7 @@ set(SOURCES src/main.cpp
         src/crc32.cpp
         src/TasksRunner.cpp
         src/Crc32Task.cpp
+        src/OpusTask.cpp
            )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
