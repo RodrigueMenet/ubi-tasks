@@ -16,11 +16,22 @@ Only *x64-Debug* configuration is supported for demo shortcut purpose.
 
 Once built, you can find ubi_tasks generated executable under out/build/x64-Debug folder
 
-You can run it with following commands
+You can run it by following the usage below
 
-__[to complete]__
+Usage:
+  Ubi-Tasks [OPTION...]
 
-Anyway, usage appears if you do not provide expected parameters
+  -i, --input arg   MANDATORY -- input directory path
+  -t, --type arg    MANDATORY -- the type of task to execute (opus / hash)
+  -o, --output arg  (opus only) output directory path (default:
+                    ./OPUS_OUTPUT)
+  -m, --mode arg    (opus only) opus mode (voip, audio or lowdelay) (default:
+                    audio)
+  -s, --seed arg    (hash only) the CRC32 seed (default: 0)
+  -h, --help        Print usage
+
+
+Anyway, usage appears if you do not provide mandatory parameters
 
 ## QUESTIONS ANSWERS
 
@@ -28,7 +39,12 @@ Anyway, usage appears if you do not provide expected parameters
 	* Used async / future pattern ; to launch several tasks in parallel and can wait easily for each result
 
 * How long did it take you to complete this assignment?
-	* __[to complete]__
+	* 1h for the environment setup
+	* 1h for architecture
+	* 0.5h for crc32 task
+	* 1.5h for opus task
+	* 1h for options
+	--> 5h
 
 * What would you do if you had more time?
 	* About project organization
@@ -42,7 +58,7 @@ Anyway, usage appears if you do not provide expected parameters
 		* More input to Opus encoding (currently limited to 16-bit signed int PCM)
 
 * What is your feedback on the assignment?
-	* __[to complete]__
+	* Could help to have samples as input for both tasks
 
 
 
