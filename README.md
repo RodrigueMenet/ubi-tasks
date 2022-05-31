@@ -33,13 +33,13 @@ Usage:
 
 Anyway, usage appears if you do not provide mandatory parameters
 
-## QUESTIONS ANSWERS
+## QUESTION ANSWERS
 
 * Parallelization approach and why?
 	* Used async / future pattern ; to launch several tasks in parallel and can wait easily for each result
 
 * How long did it take you to complete this assignment?
-	* 1h for the environment setup
+	* 1h for the environment setup / documentation
 	* 1h for architecture
 	* 0.5h for crc32 task
 	* 1.5h for opus task
