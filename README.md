@@ -55,7 +55,7 @@ Anyway, usage appears if you do not provide mandatory parameters
 		* I would have introduce loading status as a percentage of each task running in parallel
 		* Add a logging system
 		* Use coroutines / string generator to share results between the main (UI) and the runner
-		* More input to Opus encoding (currently limited to 16-bit signed int PCM)
+		* More input to Opus encoding (currently limited to *16-bit signed int 48KHz Stereo PCM*)
 		* Would use cxxopts::results to make more generic any ITask parameter usage
 
 * What is your feedback on the assignment?
