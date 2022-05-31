@@ -39,6 +39,7 @@ Anyway, usage appears if you do not provide expected parameters
 		* I would have introduce loading status as a percentage of each task running in parallel
 		* Add a logging system
 		* Use coroutines / string generator to share results between the main (UI) and the runner
+		* More input to Opus encoding (currently limited to 16-bit signed int PCM)
 
 * What is your feedback on the assignment?
 	* __[to complete]__

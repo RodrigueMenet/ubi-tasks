@@ -13,8 +13,9 @@ namespace UbiTasks
   struct TaskResult
   {
     bool IsValid; // set to false if there is no result
-    std::string InputFilePath; // the path to the file the task were done on
-    std::string Output; // the result to be displayed
+    bool ErrorTriggered; // set to false if there is no result
+    std::filesystem::path InputFilePath; // the path to the file the task were done on
+    std::string Output; // the result to be displayed / the error in case of ErrorTriggered = false;
   };
   
   struct TasksRunner

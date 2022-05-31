@@ -46,7 +46,18 @@ namespace UbiTasks
     {
       if(task.second.valid() && task.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
       {
-        TaskResult result{true, task.first, task.second.get()};
+        TaskResult result{true, false, task.first};
+        
+        try
+        {
+          result.Output = task.second.get();
+        }
+        catch(const std::exception& ex)
+        {
+          result.ErrorTriggered = true;
+          result.Output = ex.what();
+        }
+
         {
           std::unique_lock shield(mMutex);
           mAsyncTasks.erase(task.first);
@@ -54,6 +65,6 @@ namespace UbiTasks
         return result;
       }
     }
-    return {false, "", ""};
+    return {false, false, "", ""};
   }
 }

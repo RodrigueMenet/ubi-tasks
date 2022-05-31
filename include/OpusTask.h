@@ -1,7 +1,10 @@
 #pragma once
 
+#include <mutex>
+
 #include "ITask.h"
 
+struct OpusEncoder;
 
 namespace UbiTasks
 {
@@ -14,12 +17,17 @@ namespace UbiTasks
 
   struct OpusTask : ITask
   {
-    OpusTask(std::string outputFolder, OpusMode mode);
-    std::string Execute(const std::istream & is, const std::string & inputFilePath) override;
+    OpusTask(std::filesystem::path outputFolder, OpusMode mode);
+    std::string Execute(std::istream & is, const std::filesystem::path & inputFilePath) override;
+    
+    ~OpusTask() override;
 
   private:
-    std::string GetOutputPath(const std::string & inputFilePath) const;
-    const std::string mOutputFolder;
+    std::filesystem::path GetOutputPath(const std::filesystem::path & inputFilePath) const;
+    const std::filesystem::path mOutputFolder;
     const OpusMode mOpusMode;
+
+    mutable std::mutex mEncoderMutex;
+    OpusEncoder * mOpusEncoder;
   };
 }
