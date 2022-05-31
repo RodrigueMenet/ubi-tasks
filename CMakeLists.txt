@@ -11,6 +11,7 @@ set(SOURCES src/main.cpp
         src/TasksRunner.cpp
         src/Crc32Task.cpp
         src/OpusTask.cpp
+        src/TaskFactory.cpp
            )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

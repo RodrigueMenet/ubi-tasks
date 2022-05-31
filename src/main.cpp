@@ -1,37 +1,42 @@
 #include <iostream>
 #include <filesystem>
 
-#include "Crc32Task.h"
-#include "OpusTask.h"
+#include "TaskFactory.h"
 #include "TasksRunner.h"
 
 
-int main()
+int main(int argc, char** argv)
 {
-  //UbiTasks::Crc32Task crc32_task(3);
-
-  //std::stringstream ss("Test");
-  //std::cout << crc32_task.Execute(ss) << std::endl;
-  //return 1;
-  
-  UbiTasks::OpusTask opus_task(std::filesystem::current_path() / "opus_result", UbiTasks::OpusMode::LowDelay);
-  UbiTasks::TasksRunner runner(opus_task);
-
-  runner.RunOnInputDir(std::filesystem::current_path());
-
-  while(runner.IsEmpty() == false)
+  try
   {
-    if(const auto result = runner.PopResult(); result.IsValid)
+    const auto task_environment = UbiTasks::TaskFactory::CreateTask(argc, argv);
+    if (!task_environment.IsValid)
     {
-      std::cout << "##################################" << std::endl;
-      std::cout << "[INPUT]: " << result.InputFilePath.filename() << std::endl << std::endl;
-      std::cout << (result.ErrorTriggered ? "[ERROR]: " : "[OUTPUT]: ") << result.Output << std::endl;
-      std::cout << "##################################" << std::endl << std::endl;
+      return 1;
     }
-    else
+
+    UbiTasks::TasksRunner runner(*task_environment.Task);
+
+    runner.RunOnInputDir(task_environment.InputDir);
+
+    while(runner.IsEmpty() == false)
     {
-      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+      if(const auto result = runner.PopResult(); result.IsValid)
+      {
+        std::cout << "##################################" << std::endl;
+        std::cout << "[INPUT]: " << result.InputFilePath.filename() << std::endl << std::endl;
+        std::cout << (result.ErrorTriggered ? "[ERROR]: " : "[OUTPUT]: ") << result.Output << std::endl;
+        std::cout << "##################################" << std::endl << std::endl;
+      }
+      else
+      {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+      }
     }
+  }
+  catch (const std::exception & ex)
+  {
+    std::cerr << "main caught exception : " << ex.what() << std::endl;
   }
 
   return 0;
