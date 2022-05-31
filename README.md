@@ -56,9 +56,11 @@ Anyway, usage appears if you do not provide mandatory parameters
 		* Add a logging system
 		* Use coroutines / string generator to share results between the main (UI) and the runner
 		* More input to Opus encoding (currently limited to 16-bit signed int PCM)
+		* Would use cxxopts::results to make more generic any ITask parameter usage
 
 * What is your feedback on the assignment?
-	* Could help to have samples as input for both tasks
+	* Really enjoyed discovering opus & cxxopts lib! Thanks for that!
+	* Could help to have quick samples as input for both tasks
 
 
 
