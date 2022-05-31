@@ -33,6 +33,17 @@ Usage:
 
 Anyway, usage appears if you do not provide mandatory parameters
 
+## MADE ASSUMPTIONS
+
+	* Parallelisation have only be done within a unique task		
+	* I guess the whole purpose would be to achieve this scenario:
+			1. Do a crc32 on a file
+			2. Encode it
+			3. Send it + Computed CRC
+			4. Decode it
+			5. Check CRC on decoded file
+		
+
 ## QUESTION ANSWERS
 
 * Parallelization approach and why?
@@ -57,6 +68,12 @@ Anyway, usage appears if you do not provide mandatory parameters
 		* Use coroutines / string generator to share results between the main (UI) and the runner
 		* More input to Opus encoding (currently limited to *big-endian 16-bit signed int 48KHz Stereo PCM*)
 		* Would use cxxopts::results to make more generic any ITask parameter usage
+	* About project further steps		
+		* Could be enlarged to to run several tasks by
+			* capturing several -t options with cxxopts
+			* doing several tasks on the -i directory by extending the task runner / task factory
+		* adding sending / decoding / check CRC task
+		* extending directory to network locations
 
 * What is your feedback on the assignment?
 	* Really enjoyed discovering opus & cxxopts lib! Thanks for that!
