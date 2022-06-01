@@ -20,28 +20,28 @@ You can run it by following the usage below
 
 Usage:
   Ubi-Tasks [OPTION...]
-
-  -i, --input arg   MANDATORY -- input directory path
-  -t, --type arg    MANDATORY -- the type of task to execute (opus / hash)
-  -o, --output arg  (opus only) output directory path (default:
-                    ./OPUS_OUTPUT)
-  -m, --mode arg    (opus only) opus mode (voip, audio or lowdelay) (default:
-                    audio)
-  -s, --seed arg    (hash only) the CRC32 seed (default: 0)
-  -h, --help        Print usage
+  
+  	-i, --input arg   MANDATORY -- input directory path
+  	-t, --type arg    MANDATORY -- the type of task to execute (opus / hash)
+  	-o, --output arg  (opus only) output directory path (default:
+	                    ./OPUS_OUTPUT)
+  	-m, --mode arg    (opus only) opus mode (voip, audio or lowdelay) (default:
+        	            audio)
+  	-s, --seed arg    (hash only) the CRC32 seed (default: 0)
+  	-h, --help        Print usage
 
 
 Anyway, usage appears if you do not provide mandatory parameters
 
 ## MADE ASSUMPTIONS
 
-	* Parallelisation have only be done within a unique task		
-	* I guess the whole purpose would be to achieve this scenario:
-			1. Do a crc32 on a file
-			2. Encode it
-			3. Send it + Computed CRC
-			4. Decode it
-			5. Check CRC on decoded file
+* Parallelisation have only be done within a unique task		
+* I guess the whole purpose would be to achieve this scenario:
+	1. Do a crc32 on a file
+	2. Encode it
+	3. Send it + Computed CRC
+	4. Decode it
+	5. Check CRC on decoded file
 		
 
 ## QUESTION ANSWERS
