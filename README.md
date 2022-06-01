@@ -12,7 +12,7 @@ MSVC-CMake approach have been kept. Just open the git-versioned cmake folder wit
 
 Only *x64-Debug* configuration is supported for demo shortcut purpose.
 
-Migrated the project to **C++20** language, however you can switch it to **C++17** version and it still compiles.
+Migrated the project to **C++17** language.
 
 ## HOW TO RUN
 
